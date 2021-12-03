@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "WorkshopApiApp/1.0.0": {
+        "dependencies": {
+          "WorkshopApi": "1.0.0"
+        },
+        "runtime": {
+          "WorkshopApiApp.dll": {}
+        }
+      },
+      "WorkshopApi/1.0.0": {
+        "runtime": {
+          "WorkshopApi.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WorkshopApiApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WorkshopApi/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
