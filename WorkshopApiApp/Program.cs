@@ -63,6 +63,12 @@ namespace WorkshopApiApp
             // hole ein spezifisches Produkt
             var singleReview = clientV2.GetReview(1, 101);
 
+            clientV2.AddReview(1, new Review()
+            {
+                Rating = 3,
+                Text = "tolles produkt",
+            });
+
         }
 
         private static void V1()

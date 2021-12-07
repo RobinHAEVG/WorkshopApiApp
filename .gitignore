@@ -1,1 +1,7 @@
 .vs
+
+WorkshopApi/bin
+WorkshopApi/obj
+
+WorkshopApiApp/bin
+WorkshopApiApp/obj

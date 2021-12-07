@@ -121,8 +121,6 @@ namespace WorkshopApi
             }
         }
 
-
-
         public List<Review> GetAllReviews(int productId)
         {
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, $"product/{productId}/review/getall");
@@ -139,17 +137,41 @@ namespace WorkshopApi
 
         public Review GetReview(int productId, int reviewId)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, $"product/{productId}/review/{reviewId}/get");
+            AddAuthHeader(req);
+            HttpResponseMessage resp = this.httpClient.Send(req);
+            if (resp.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception($"Expected status code 200, got {resp.StatusCode}");
+            }
+
+            string body = resp.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonSerializer.Deserialize<Review>(body);
         }
 
-        public Review AddReview(int productId, Review r)
+        public void AddReview(int productId, Review r)
         {
-            throw new NotImplementedException();
+            r.ProductId = productId;
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, $"product/{productId}/review/add");
+            AddAuthHeader(req);
+            req.Content = new StringContent(JsonSerializer.Serialize(r));
+            HttpResponseMessage resp = this.httpClient.Send(req);
+            if (resp.StatusCode != HttpStatusCode.OK) // eigentlich 202 Created
+            {
+                throw new Exception($"Expected status code 200, got {resp.StatusCode}");
+            }
         }
 
         public void EditReview(int productId, Review r)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, $"product/{productId}/review/{r.Id}/edit");
+            AddAuthHeader(req);
+            req.Content = new StringContent(JsonSerializer.Serialize(r));
+            HttpResponseMessage resp = this.httpClient.Send(req);
+            if (resp.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception($"Expected status code 200, got {resp.StatusCode}");
+            }
         }
     }
 }
