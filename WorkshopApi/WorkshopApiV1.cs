@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace WorkshopApi
 {
@@ -88,7 +87,5 @@ namespace WorkshopApi
                 throw new Exception($"Expected status code 200, got {resp.StatusCode}");
             }
         }
-
-        
     }
 }
