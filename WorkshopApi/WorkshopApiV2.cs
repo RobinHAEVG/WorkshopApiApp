@@ -44,6 +44,11 @@ namespace WorkshopApi
             this.accessToken = JsonSerializer.Deserialize<AccessToken>(body);
         }
 
+        public bool IsAccessTokenValid()
+        {
+            return this.accessToken.ValidUntil > DateTime.Now.AddMinutes(-10);
+        }
+
         private void AddAuthHeader(HttpRequestMessage req)
         {
             if (this.accessToken.ValidUntil > DateTime.Now.AddMinutes(-10))
