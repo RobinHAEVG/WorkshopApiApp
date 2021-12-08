@@ -3,8 +3,8 @@
 This project (WorkshopApi) is a package meant to facilitate app development against the 
 [Workshop API](https://github.com/KaiserWerk/Workshop-API).
 
-This package offers an easy-to-use abstraction of the Workshop API without the hassle of proper
-authentication HTTP calls.
+This package offers an easy-to-use abstraction of the Workshop API without the hassle of complicated
+authentication or executing HTTP calls.
 
 There is a Client for version 1 (ClientV1) and version 2 (ClientV2).
 ClientV1 can only handle products while ClientV2 can handle reviews on top of that.
