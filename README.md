@@ -20,18 +20,18 @@ var clientV1 = new ClientV1("http://api-base-url.com", "your api key"); // exact
 Then, you can call these methods on the version 1 client:
 
 ```csharp
-public List<Product> GetAllProducts()
-public Product GetProduct(int productId)
-public void AddProduct(Product p)
-public void EditProduct(Product p)
-public void RemoveProduct(int id)
+public List<Product> GetAllProducts();
+public Product GetProduct(int productId);
+public void AddProduct(Product p);
+public void EditProduct(Product p);
+public void RemoveProduct(int id);
 ```
 
 The version 2 client has additional methods to handle reviews:
 
 ```csharp
-public List<Review> GetAllReviews(int productId)
-public Review GetReview(int productId, int reviewId)
-public void AddReview(int productId, Review r)
-public void EditReview(int productId, Review r)
+public List<Review> GetAllReviews(int productId);
+public Review GetReview(int productId, int reviewId);
+public void AddReview(int productId, Review r);
+public void EditReview(int productId, Review r);
 ```
