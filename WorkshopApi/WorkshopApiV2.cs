@@ -12,7 +12,7 @@ namespace WorkshopApi
         private const string API_PREFIX = "/api/v2/";
         private HttpClient httpClient;
         private string apiKey;
-        private string accessToken;
+        private AccessToken accessToken;
 
         public WorkshopApiV2(string baseUrl, string apiKey)
         {
@@ -41,17 +41,18 @@ namespace WorkshopApi
             }
 
             string body = resp.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            AccessToken at = JsonSerializer.Deserialize<AccessToken>(body);
-            this.accessToken = at.Token;
-        }
-        
-        
-        private void AddAuthHeader(HttpRequestMessage req)
-        {
-            string token = $"nobody:{this.accessToken}".ToBase64();
-            req.Headers.Authorization = new AuthenticationHeaderValue("Basic", token);
+            this.accessToken = JsonSerializer.Deserialize<AccessToken>(body);
         }
 
+        private void AddAuthHeader(HttpRequestMessage req)
+        {
+            if (this.accessToken.ValidUntil > DateTime.Now.AddMinutes(-10))
+            {
+                this.Authenticate();
+            }
+            string token = $"nobody:{this.accessToken.Token}".ToBase64();
+            req.Headers.Authorization = new AuthenticationHeaderValue("Basic", token);
+        }
 
         public List<Product> GetAllProducts()
         {
