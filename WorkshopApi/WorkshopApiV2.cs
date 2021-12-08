@@ -46,15 +46,14 @@ namespace WorkshopApi
 
         public bool IsAccessTokenValid()
         {
-            return this.accessToken.ValidUntil > DateTime.Now.AddMinutes(-10);
+            return this.accessToken.ValidUntil > DateTime.Now.AddMinutes(10);
         }
 
         private void AddAuthHeader(HttpRequestMessage req)
         {
-            if (this.accessToken.ValidUntil > DateTime.Now.AddMinutes(-10))
-            {
+            if (!this.IsAccessTokenValid())
                 this.Authenticate();
-            }
+            
             string token = $"nobody:{this.accessToken.Token}".ToBase64();
             req.Headers.Authorization = new AuthenticationHeaderValue("Basic", token);
         }
